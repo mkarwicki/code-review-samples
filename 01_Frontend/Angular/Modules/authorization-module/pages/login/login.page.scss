@@ -1,0 +1,27 @@
+:host {
+  .login-actions-container {
+    min-height: calc(100vh - 200px);
+    display:flex;
+    align-items: center;
+    max-width:300px; margin:auto;
+    .login-actions {
+      text-align: left;
+      width:100%; padding:20px 0;
+      form {
+        margin:10px 0 20px 0;
+      }
+
+      .forgot-password {
+        text-align: center;
+        padding:0;
+        ion-button {
+          text-transform: none;
+          text-decoration: underline;
+          font-size:rem-calc(16);
+        }
+      }
+
+
+    }
+  }
+}

@@ -1,0 +1,56 @@
+<div class="tab-content reviews-tab">
+    <div class="overall-score">
+        <span class="overall-score-title">
+            {{ translate('public_listing_overall_score', {score: listing.rating}) }}
+        </span>
+        &nbsp;{% include 'Widgets/HearthRating.twig' with {'heart': listing.rating} %}
+    </div>
+    <div class="reviews-list">
+        {% for review in listing.tabs.reviews.data %}
+            <div class="review">
+                <h4 class="review-title">
+                    {% include 'Widgets/HearthRating.twig' with {'heart': (review.rating != null ? review.rating.rating : null)} %}
+                    {{review.title | e('html')}}
+                </h4>
+                <p class="review-date">
+                    {{review.date|formatToTpl('date_format')}}
+                    <i>
+                        {{ translate('public_listing_reviews_authored_by') }}
+                        {% if review.user_id != 0 and review.user is not null %}
+                            {{ review.user.user_first_name  | e("html")}}
+                        {% else %}
+                            {{ review.name | e("html") }}
+                        {% endif %}
+                    </i>
+                </p>
+                <p class="review-description">
+                    {{review.review| e('html')}}
+                </p>
+                {% if review.comment_count > 0 %}
+                    {% if review.comment is not null %}
+                        <div class="answer">
+                            <div class="time-answer">{{ translate('public_listing_reviews_answer_from', { listing_title: listing.title | e("html"), date: review.comment.date|formatToTpl('date_format') }) }}</div>
+                            <div>{{ review.comment.comment | e("html") }}</div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="tab-content reviews-tab reviews-action">
+    <div class="actions">
+        {% if listing.reviews_count > 10 %}
+            <a href="{{listing.link}}#reviews-section" class="default-tab-button">
+                {{translate('public_listing_read_reviews')}}
+            </a>
+        {% endif %}
+        <a href="{{ urlFor('page.listing_reviews_add', {id: listing.id}) }}" class="default-tab-button">
+            <i class="fa fa-plus"></i>
+            {{translate('public_listing_add_a_review_listing')}}
+        </a>
+        <a href="{{listing.link}}#reviews-section" class="transparent-tab-button">
+            {{translate('public_listing_report_review')}}
+        </a>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+
+export interface AuthorizationCommandInterface {
+
+  execute();
+
+}

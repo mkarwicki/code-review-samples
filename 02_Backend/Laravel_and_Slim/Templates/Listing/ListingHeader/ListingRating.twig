@@ -1,0 +1,3 @@
+{% if listing.has_restricted_category == 0 and listing.ratings_allow == 1 and listing.reviews_allow and listing.reviews_count != 0 %}
+    {% include 'Widgets/HearthRating.twig' with {'heart': listing.rating} %}
+{% endif %}

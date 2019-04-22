@@ -1,0 +1,16 @@
+{% if (listing.images | length) > 0 %}
+    {% for image in listing.images %}
+        <div class="listing-gallery-image listing-media listing-gallery-image-{{ loop.index }}" data-analytics="{{ dataAnalytics }}">
+            <a href="{{ listing.link }}">
+                {% if index > 3 %}
+                    <img data-src="{{image.thumb}}" alt="{{image.title}}" {#width="70" height="70"#}>
+                {% else %}
+                    <img src="{{image.thumb}}" alt="{{image.title}}">
+                {% endif %}
+            </a>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+

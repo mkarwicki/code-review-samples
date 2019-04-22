@@ -1,0 +1,15 @@
+<div class="tab-content members-tab">
+    {% for associationListing in listing.tabs.associations.data %}
+        <div class="member-default-box">
+            <div class="member-image-container">
+                {% if associationListing.has_logo %}
+                    <span class="bg" style="background-image:url('{{ associationListing.getLogo() }}')"></span>
+                    <img class="rounded-circle" alt="logo" src="{{ associationListing.getLogo() }}">
+                {% endif %}
+            </div>
+            <div class="member-description">
+                {{ associationListing.title | e('html') }}
+            </div>
+        </div>
+    {% endfor %}
+</div>

@@ -1,0 +1,75 @@
+{% if config('home_page_section_testimonials_visible') > 0 and testimonials is not empty and testimonials | length > 1 %}
+    <div class="section-container">
+        <section class="main-slider-section-container client-testimonials-section-container">
+            <div class="container">
+                <h2 class="section-title"> {{ translate('public_start_testimonials_header') }}</h2>
+                <div class="main-slider-container">
+                    <div class="main-slider" id="clientsTestimonialsSlider">
+                        {% for testimonial in testimonials %}
+                            {% set profileImage = testimonial.listing.user.getAvatar() %}
+                            <div class="slide">
+                                <div class="slide-content testimonial">
+                                    <div class="testimonial-content">
+                                        {% if testimonial.listing.has_logo == 1 %}
+                                            <div class="testimonial-logo-container">
+                                                <a href="{{ testimonial.listing.getUrl() }}" target="_blank">
+                                                    <img
+                                                        src="{{ testimonial.listing.getLogo() }}"
+                                                        alt="{{ translate('public_packages_testimonial_from',{'person': testimonial.person}) }} {{ testimonial.listing.title | e("html_attr") }}"
+                                                    >
+                                                </a>
+                                            </div>
+                                        {% endif %}
+                                        <div class="testimonial-main-content">
+                                            {% if  testimonial.heading  %}
+                                                <h3 class="testimonial-title">{{ testimonial.heading }}</h3>
+                                            {%  endif %}
+                                            <p>
+                                                <i class="fa fa-angle-double-left"></i>
+                                                {{ testimonial.content | nl2br }}
+                                                <i class="fa fa-angle-double-right"></i>
+                                            </p>
+                                            <div class="button-container">
+                                                {% if testimonial.full_url is not empty %}
+                                                    <a href="{{ testimonial.full_url }}" target="_blank" class="btn btn-default btn-read-full">{{ translate('public_packages_testimonial_btn') }}</a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        {% if profileImage is not empty %}
+                                            <div class="testimonials-person-avatar-container">
+                                                <div class="testimonials-person-avatar">
+                                                    <span class="bg-fix" style="background-image:url('{{ profileImage }}')"></span>
+                                                    <img src="{{ profileImage }}" alt="{{ testimonial.listing.title | e("html_attr") }}">
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                        <div class="testimonials-person-card">
+                                            <p>
+                                                {{ translate('public_testimonials_from_user_at', {from: testimonial.person, user_function: testimonial.user_function }) }} <br>
+                                            </p>
+                                            <p>
+                                                <a href="{{ testimonial.listing.getUrl() }}">
+                                                    {{ testimonial.listing.title | e("html_attr") }}
+                                                </a>
+                                                <br>
+                                                {% if testimonial.listing.featured == 1 %}
+                                                    {{ testimonial.listing.product.name }} {{ translate('public_packages_testimonial_featured_listing') }}<br>
+                                                {% endif %}
+                                                {% if testimonial.listing.category is not empty %}
+                                                    {{ testimonial.listing.category.title }}<br>
+                                                {% endif %}
+                                                {% if testimonial.listing.location is not empty %}
+                                                    {{ testimonial.listing.location.title }}, {{ testimonial.listing.location.getTop().title }}
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endif %}

@@ -1,0 +1,30 @@
+<div class="more-options-container">
+    <ul class="more-options-nav">
+        {%  if listing.short_description %}
+            <li>
+                <a data-tab-handle="mobile-description" data-listing-id="{{ listing.id }}" class="more-option-tab-toggle">
+                    {{ translate('public_general_description') }}
+                </a>
+            </li>
+        {% endif %}
+        {% if listing.has_restricted_category == constant('Orm\\Model\\Listings\\Listings::NO_RESTRICTED_CATEGORY') %}
+            <li>
+                {% include 'Blocks/Search/Listing/Partials/AddReview.twig' with {'showIcon': false } %}
+            </li>
+        {% endif %}
+        <li>
+            {% include 'Blocks/Search/Listing/Partials/MoreDetails.twig' with {'showIcon': false } %}
+        </li>
+    </ul>
+    {%  if listing.short_description %}
+        <div class="more-options-tabs">
+            <div class="tab-container listing-tab description-tab" data-tab-handle="mobile-description" data-listing-id="{{ listing.id }}">
+                <div class="tab-content description-tab">
+                    <p>
+                        <span></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>

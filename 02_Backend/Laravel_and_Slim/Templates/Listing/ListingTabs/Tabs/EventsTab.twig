@@ -1,0 +1,35 @@
+<div class="tab-content events-tab">
+    {% for event in listing.tabs.events.data %}
+    <div class="event">
+        <h4>
+            <a href="{{ listing.link }}#events">
+               {{ event.title | e('html') }}
+            </a>
+        </h4>
+        {% if event.occurrence is not empty %}
+            <p itemprop="startDate" content="{{event.occurrence.start|formatToTpl('date_format')}}">
+                {% if event.occurrence.start is defined %}
+                    {{ translate('public_listing_event_dates_from_to', { from: event.occurrence.start|formatToTpl('definition_format','%#d %b %Y'), to: event.occurrence.end|formatToTpl('definition_format','%#d %b %Y') }) }}
+                {% endif %}
+            </p>
+        {% endif %}
+
+        {% include 'Blocks/Events/CustomFields.twig' with {customFields: customFieldsEvents} %}
+
+        <p>
+            {{ event.description | e("html") }}
+        </p>
+
+        <div class="event-action-buttons">
+            <a data-url="{{ urlFor('page.event_contact_owner', {id: event.id, action: 'sign-up'}) }}" class="events-request-contact primary-button stat-email" data-listing-id="{{event.listing.id}}" data-event-id="{{event.id}}" data-type="{{ constant('Lib\\Listings\\Stats\\Stats::STAT_OUT_INTERACTIONS_EMAIL_EVENT_SIGNUP') }}"
+               data-analytics="EventSignUp_results_{% if event.listing.featured %}featured{% else %}standard{% endif %}">
+                {{ translate('public_listing_event_sign_up') }}
+            </a>
+            <a data-url="{{ urlFor('page.event_contact_owner', {id: event.id, action: 'request-details'}) }}" class="events-request-contact secondary-button stat-email" data-listing-id="{{event.listing.id}}" data-event-id="{{event.id}}" data-type="{{ constant('Lib\\Listings\\Stats\\Stats::STAT_OUT_INTERACTIONS_EMAIL_EVENT_MOREDETAILS') }}"
+               data-analytics="EventMoreDetails_results_{% if event.listing.featured %}featured{% else %}standard{% endif %}">
+                {{ translate('public_listing_more_details') }}
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>

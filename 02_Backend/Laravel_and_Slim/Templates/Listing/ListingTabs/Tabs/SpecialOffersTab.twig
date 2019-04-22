@@ -1,0 +1,52 @@
+<div class="tab-content special-offers-tab">
+    {% for special_offer in listing.tabs.special_offers.data %}
+        <div class="special-offer">
+            <h4>
+                <a href="{{ listing.link }}#sp-offer">
+                    {{special_offer.title | e('html')}}
+                </a>
+            </h4>
+
+            {% if special_offer.occurrence is not empty and special_offer.occurrence.isUndefined() == false %}
+                <p itemprop="startDate" content="{{special_offer.occurrence.start|formatToTpl('date_format')}}">
+                    {{ translate('public_listing_special_offer_validity_from_to', { from: special_offer.occurrence.start|formatToTpl('definition_format','%#d %b %Y'), to: special_offer.occurrence.end|formatToTpl('definition_format','%#d %b %Y') }) }}
+                </p>
+            {% endif %}
+
+            <p>
+                {{special_offer.description | e('html') }}
+            </p>
+
+            <div class="event-action-buttons">
+                <a
+                    data-url="{{ urlFor('page.event_so_contact_owner', {id: special_offer.id, action: 'claim'}) }}"
+                    class="events-request-contact primary-button stat-email"
+                    data-listing-id="{{special_offer.listing.id}}" data-event-id="{{special_offer.id}}" data-type="{{ constant('Lib\\Listings\\Stats\\Stats::STAT_OUT_INTERACTIONS_EMAIL_SPECIAL_OFFER_CLAIM') }}"
+                    data-analytics="SpecialOfferClaim_results_{% if special_offer.listing.featured %}featured{% else %}standard{% endif %}">
+                    {{ translate('public_listing_special_offer_claim') }}
+                </a>
+                <a
+                    data-url="{{ urlFor('page.event_so_contact_owner', {id: special_offer.id, action: 'request-details'}) }}"
+                    class="events-request-contact secondary-button stat-email"
+                    data-listing-id="{{special_offer.listing.id}}" data-event-id="{{special_offer.id}}" data-type="{{ constant('Lib\\Listings\\Stats\\Stats::STAT_OUT_INTERACTIONS_EMAIL_SPECIAL_OFFER_MOREDETAILS') }}"
+                    data-analytics="SpecialOfferMoreDetails_results_{% if special_offer.listing.featured %}featured{% else %}standard{% endif %}">
+                    {{ translate('public_listing_more_details') }}
+                </a>
+            </div>
+        </div>
+            
+        {% if loop.index == 5 and loop.length > 5 %}
+        <div class="load-more-button-container">
+            <a class="load-more-items-button">
+                <i class="fa fa-repeat"></i>
+                {{ translate('public_browse_result_pages_tab_reviews_load_more') }}
+            </a>
+        </div>
+        <div class="hidden-content-container">
+        {% endif %}
+        
+        {% if loop.length > 5 and loop.last %}
+        </div>    
+        {% endif %}
+    {% endfor %}
+</div>

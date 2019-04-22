@@ -1,0 +1,9 @@
+{% if listing.category_indicator is not empty %}
+    <div class="listing-breadcrumb">
+        {{listing.category_indicator.first.title}}
+        {% if listing.category_indicator.last is defined %}
+            <span class="fa fa-chevron-right"></span>
+            {{listing.category_indicator.last.title}}
+        {% endif %}
+    </div>
+{% endif %}

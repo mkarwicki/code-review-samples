@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        {% block meta %}
+            {{ include('common/header/header_meta/base_header_meta.html.twig') }}
+        {% endblock %}
+        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,800,800i&amp;subset=latin-ext" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <div class="app-container">
+            {% block start %}{% endblock %}
+            {{ include('common/components/navigation/top/top.html.twig') }}
+            {% block body %}
+            {% endblock %}
+            {{ include('common/components/navigation/footer/footer.html.twig') }}
+            {% block end %}{% endblock %}
+        </div>
+        <script src="{{ asset('assets/js/vendor/bundle.js') }}"></script>
+        <script>
+            SystemJS.import("{{ asset('assets/js/app.js') }}").then(function (m) {
+                System.import('Main');
+            });
+        </script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

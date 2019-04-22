@@ -1,0 +1,27 @@
+{% if jobs.haveToPaginate %}
+    <div class="pagination-container">
+        {{ pagerfanta(
+            jobs,
+            'default',
+            {
+                'routeName': 'users_jobs_list_page_paginated',
+                'routeParams': routeParams
+            }
+        )}}
+        {%
+            set maxPages = (jobs|length / 10)
+        %}
+        <div class="currentStatus">
+          <span>
+              {{ paginationPage }}
+          </span>
+          <span>
+              of
+          </span>
+          <span>
+            {{ maxPages|round(0, 'ceil') }}
+          </span>
+        </div>
+    </div>
+{% endif %}
+

@@ -1,0 +1,26 @@
+<div class="job-list-browser" id="companyUsersBrowser">
+    <div class="form-area">
+        <div class="input-container">
+            <input placeholder="Keyword or job ID" name="q" value="{{ app.request.get('q') }}" class="form-control form-control-lg q-search">
+        </div>
+        <div class="button-container">
+            <button class="btn btn-primary btn-lg search-btn">Search</button>
+        </div>
+    </div>
+    <div class="job-status-selector" style="">
+        <select class="form-control" name="status">
+            <option value="both">
+                Both
+            </option>
+            <option value="open"  {% if(app.request.get('status') == 'open' or not app.request.get('status'))  %} selected {% endif %}>
+                Open
+            </option>
+            <option value="closed" {% if(app.request.get('status') == 'closed')  %} selected {% endif %}>
+                Closed
+            </option>
+        </select>
+        <label>
+            Job status
+        </label>
+    </div>
+</div>

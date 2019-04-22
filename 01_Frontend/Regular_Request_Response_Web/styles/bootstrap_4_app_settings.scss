@@ -1,0 +1,98 @@
+/*********************/
+/** SASS FUNCTIONS **/
+/*******************/
+@import 'functions/functions.scss';
+/*******************************/
+/** APP VARIABLES SETTINGS  **/
+/****************************/
+@import 'common/settings/variables/variables.scss';
+/*****************************************/
+/** BOOTSTRAP AND BOOTSTRAP OVERRIDES **/
+/**************************************/
+@import 'vendor/bootstrap/bootstrap.scss';
+/* TITATOGGLE */
+@import 'vendor/titatoggle/titatoggle.scss';
+@import 'vendor/titatoggle/titatoggle-ovverides.scss'; /*CUSTOM OVERRIDES SO WE CAN HAVE THE TEXT ON LEFT OF THE TOGGLE
+/* APP MAIN SETTINGS */
+@import 'common/settings/typography/typography.scss';
+@import 'common/settings/form/form.scss';
+@import 'common/settings/buttons/buttons.scss';
+@import 'common/settings/badges/badges.scss';
+@import 'common/settings/wrappers/default_wrappers.scss';
+@import 'common/settings/panels/profile_details_panel.scss';
+/*************************/
+/** COMMON COMPONENTS **/
+/**********************/
+/** NAVIGATION **/
+@import 'common/components/navigation/top/top.scss';
+/** TOP SUB NAVIGATION **/
+@import 'common/components/navigation/top/top_sub_navigation.scss';
+/** FOOTER **/
+@import 'common/components/navigation/footer/footer.scss';
+/** BREADCRUMB **/
+@import 'common/components/navigation/top/top_bradcrumb.scss';
+/** DETAILS LIST (KEY VALUE PAIR) **/
+@import 'common/components/list/details-list.scss';
+/** PAGINATION **/
+@import 'common/components/list/pagination.scss';
+/** TEXT **/
+@import 'common/components/text/more-less-toggle.scss';
+/** MODAL **/
+@import 'common/components/modal/modal.scss';
+/*************************************************/
+/** LOGIN AND SIGN UP SETTINGS AND COMPONENTS **/
+/**********************************************/
+@import 'common/settings/wrappers/login_and_sign_up.scss';
+/** LOGIN FORM **/
+@import 'common/components/login_and_sign_up/login_form.scss';
+/** SIGN UP FORM **/
+@import 'common/components/login_and_sign_up/sign_up_form.scss';
+/** SIGN UP THANK YOU **/
+@import 'common/components/login_and_sign_up/thank_you.scss';
+/** FORGOTTEN PASSWORD REQUEST FORM **/
+@import 'common/components/login_and_sign_up/forgotten_password_request_form.scss';
+/*********************/
+/** JOB LIST PAGE **/
+/******************/
+@import 'visitors/pages/job_list_page/job_list_page.scss';
+@import 'visitors/pages/job_list_page/_job_list_browser.scss';
+@import 'visitors/pages/job_list_page/_job_list_filters.scss';
+@import 'visitors/pages/job_list_page/_job_list_order.scss';
+@import 'visitors/pages/job_list_page/_job_list_job.scss';
+/*************************/
+/** VISITORS JOB PAGE **/
+/**********************/
+@import 'visitors/pages/job_page/job_page.scss';
+@import 'visitors/pages/job_page/_job_main_bids_section.scss';
+@import 'visitors/pages/job_page/_job_card_panel.scss';
+@import 'visitors/pages/job_page/_job_post_a_bid_modal.scss';
+@import 'visitors/pages/job_page/_job_retract_your_bid_modal.scss';
+@import 'common/settings/wrappers/job_list.scss';
+/*FORM SETTINGS*/
+@import 'common/settings/form/form.scss';
+@import 'common/settings/form/ajax-form';  // ajax form
+/** 1 - MAIN PAGE **/
+@import 'visitors/pages/main_page/main_page.scss';
+@import 'visitors/pages/main_page/sections/slider/main_page_slider_section.scss';
+/** 2 - SIGN UP PAGE **/
+@import 'visitors/pages/sign_up_page/sign_up_page.scss';
+/** 3 - LOGIN PAGE **/
+@import 'visitors/pages/login_page/login_page.scss';
+/**********************/
+/** LOGGED IN USERS **/
+/********************/
+/*EDIT PROFILE*/
+@import 'users/common/pages/edit_profile/edit_profile.scss';
+/*EDIT PROFILE DETAILS*/
+@import 'users/common/pages/edit_profile_details/edit_profile_details.scss';
+/*************************/
+/** CONTRACTORS USERS **/
+/**********************/
+/*CONTRACTORS DASHBOARD*/
+@import 'users/contractors/pages/dashboard/contractors_dashboard.scss';
+@import 'users/contractors/pages/edit_profile/edit_profile.scss';
+/********************/
+/** COMPANY USERS **/
+/******************/
+/*POST A JOB*/
+@import 'users/companies/pages/post_a_job/post_a_job_page.scss';

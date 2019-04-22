@@ -1,0 +1,10 @@
+<div class="
+        listing-title
+        {% if listing.has_restricted_category == 0 and listing.ratings_allow == 1 and listing.reviews_allow and listing.reviews_count != 0 %}
+            list-title-with-rating
+        {% endif %}#}
+    ">
+    <a href="{{listing.link}}" data-analytics="{{ dataAnalytics }}">
+        {{listing.title | e('html_attr')}}
+    </a>
+</div>

@@ -1,0 +1,175 @@
+{# @var job \App\Entity\Jobs #}
+<tbody class="job-list">
+    {% for job in jobs %}
+        <tr class="job-row">
+            <td class="job-cell">
+                <div class="job">
+                    {#
+                        JOB SUMMARY
+                     #}
+                    <div class="job-summary">
+                       <div class="job-summary-element job-summary-sector-info">
+                           {% if job.jobsSectors is defined and job.jobsSectors|length > 0 %}
+                                {{ job.jobsSectors|first.sectors.name }} - {{ job.jobsSectors|first.qualifications.name }}
+                           {% endif %}
+                       </div>
+                       <div class="job-summary-element  job-summary-badge-container">
+                           <span class="job-badge job-badge-{{ job.status }}">
+                            {{ job.status | capitalize }}
+                            </span>
+                       </div>
+                       <div class="job-summary-element  job-summary-id-container">
+                           {{ job.jobID | upper }}
+                       </div>
+                        {% if not job.bidPlaced %}
+                            <a href="{{ path('users_company_edit_a_job', {jobURI: job.getUriSlug()} ) }}">
+                                (edit job)
+                            </a>
+                        {% endif %}
+                    </div>
+                    {#
+                        JOB MAIN INFO
+                     #}
+                    <table cellpadding="0" cellspacing="0" class="job-main-info company-table">
+                        <tr>
+                            {#
+                                JOB DESCRIPTION
+                            #}
+                            <td class="job-description">
+                                <a href="{{ path('visitors_job_page', {jobURI : job.getUriSlug() }) }}" class="job-title">
+                                    {{ job.title }}
+                                </a>
+                                <p>
+                                    {{ job.description|slice(0,300) }} {% if job.description|length>300 %}...{% endif %}
+                                </p>
+                                <div class="job-properties">
+                                    <div class="details-list">
+                                        <div class="detail">
+                                            <span class="detail-field field-key">
+                                                Location
+                                            </span>
+                                            <span class="detail-field field-value">
+                                                {% if job.locationType == 1 %}
+                                                    {{ 'global.local_job'|trans }},
+                                                    {% if job.compactZIP == 2 %}
+                                                        {{ job.zip | compactZIP  }}
+                                                    {% else %}
+                                                        {{ job.zip }}
+                                                    {% endif %}
+                                                {% else %}
+                                                    {{ 'global.online_job'|trans }}
+                                                {% endif %}
+                                            </span>
+                                        </div>
+                                        <div class="detail detail-skills">
+                                             <span class="detail-field field-key">
+                                                 {{ 'global.skills'| trans }}
+                                            </span>
+                                            <span class="detail-field field-value">
+                                                {{ job.skills }}
+                                            </span>
+                                        </div>
+                                        <div class="detail detail-budget-rate">
+                                            <span class="detail-field field-key">
+                                                Bids range
+                                            </span>
+                                            <span class="detail-field field-value">
+                                                  {{ job.minBid }} - {{ job.maxBid }} {{ job.getBudgetOrRateAbbrev() }}
+                                            </span>
+                                        </div>
+                                        <div class="detail detail-bids">
+                                            <span class="detail-field field-key">
+                                                Bids
+                                            </span>
+                                            <span class="detail-field field-value">
+                                                 {{ job.bidsCount() }}
+                                                {% if job.getNewBidsNumber() %}
+                                                    <span>({{ job.getNewBidsNumber() }} new)</span>
+                                                {% endif %}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {#
+                                    JOB MOBILE ACTIONS
+                                #}
+                                <div class="job-mobile-actions">
+                                    <div class="details-list">
+                                        <div class="detail">
+                                        <span class="detail-field field-key">
+                                            Bidding closes
+                                        </span>
+                                            <span class="detail-field field-value">
+                                            {{ job.deadline | date('d.m.y H:i') }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="job-gap"></td>
+                            {%  for sortField in browserConfigurationData.sortFields %}
+                                {#
+                                   JOB BIDDING CLOSES
+                                #}
+                                {% if(sortField.slug == 'bc') %}
+                                    <td class="job-sortable-cell job-bidding-closes">
+                                        {{ job.deadline | date('d.m.Y H:i') }}
+                                    </td>
+                                {% endif %}
+                                {#
+                                   JOB BIDS
+                                #}
+                                {% if(sortField.slug == 'bids') %}
+                                    <td class="job-sortable-cell job-bids">
+                                        {{ job.bidsCount() }} <br>
+                                        {% if job.getNewBidsNumber() %}
+                                            <span>{{ job.getNewBidsNumber() }} new</span>
+                                        {% endif %}
+                                    </td>
+                                {% endif %}
+                                {#
+                                   JOB BIDS RANGE
+                                #}
+                                {% if(sortField.slug == 'bids_range') %}
+                                    <td class="job-sortable-cell job-bids-range">
+                                        {{ job.minBid }} - {{ job.maxBid }} {{ job.getBudgetOrRateAbbrev() }}
+                                    </td>
+                                {% endif %}
+                                {#
+                                   JOB LAST BID
+                                #}
+                                {% if(sortField.slug == 'last_bid') %}
+                                    <td class="job-sortable-cell job-last-bid">
+                                        {% if job.lastBidValue %}
+                                            {{ job.lastBidValue }} {{ currency }}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </td>
+                                {% endif %}
+                                {#
+                                   JOB PUBLISH DATE
+                                #}
+                                {% if(sortField.slug == 'pd') %}
+                                    <td class="job-sortable-cell job-publish-date">
+                                        {{ job.publishDate | date('d.m.Y H:i') }}
+                                    </td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    </table>
+                    {#
+                   JOB STATUS AND ACTINS
+               #}
+                    <div class="job-status-and-action">
+                        {% if job.status=='open' %}
+                        {% else %}
+                            <span class="job-badge job-badge-contracted">&#9733; Contracted</span>
+                            <span class="job-badge job-badge-accepted">Accepted</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+</tbody>

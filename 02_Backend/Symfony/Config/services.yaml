@@ -1,0 +1,92 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: 'en'
+    currency: '€'
+    service-title: 'EU Freelancer'
+
+
+imports:
+    # CUSTOM CONFIGURATIONS
+   - { resource: app/sign_up.yaml }
+   - { resource: app/contracts.yaml }
+   - { resource: app/notifications.yaml }
+   - { resource: app/pages.yaml }
+
+
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false       # Allows optimizing the container by removing unused services; this also means
+                            # fetching services directly from the container via $container->get() won't work.
+                            # The best practice is to be explicit about your dependencies anyway.
+
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{Entity,Migrations,Tests,Kernel.php}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+
+
+#    jobs.template.custom_pagination:
+#        class: App\VendorElements\Pagerfanta\CustomPaginationView
+#
+#    pagerfanta.view.custom_pagination:
+#        class: Pagerfanta\View\DefaultView
+#        public: false
+#        arguments:
+#            - "@jobs.template.custom_pagination"
+#            tags: [{ name: pagerfanta.view, alias: custom_pagination_view }]
+#
+#   AD<OM SETTOMGS
+    admin.users:
+        class: App\Admin\UsersAdmin
+        arguments: [~, App\Entity\Users, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Users }
+        public: true
+    admin.jobs:
+        class: App\Admin\JobsAdmin
+        arguments: [~, App\Entity\Jobs, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Jobs }
+        public: true
+    admin.bids:
+        class: App\Admin\BidsAdmin
+        arguments: [~, App\Entity\Bids, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Bids }
+        public: true
+    admin.contracts:
+        class: App\Admin\ContractsAdmin
+        arguments: [~, App\Entity\Contracts, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Contracts }
+        public: true
+    admin.ads:
+        class: App\Admin\AdsAdmin
+        arguments: [~, App\Entity\Ads, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Ads }
+        public: true
+
+
+
+

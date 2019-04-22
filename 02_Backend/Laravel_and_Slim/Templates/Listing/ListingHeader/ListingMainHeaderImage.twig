@@ -1,0 +1,13 @@
+{%  if(listing.logo_thumb ) %}
+    <a href="{{listing.link}}" class="listing-main-header-image" data-analytics="{{ dataAnalytics }}">
+        <span class="v-a-w">
+            <span class="v-a">
+                {% if index < 3 %}
+                    <img src="{{listing.logo_thumb }}" alt="{{listing.title | e('html_attr')}}">
+                {% else %}
+                    <img data-src="{{listing.logo_thumb }}" alt="{{listing.title | e('html_attr') }}">
+                {% endif %}
+            </span>
+        </span>
+    </a>
+{% endif %}

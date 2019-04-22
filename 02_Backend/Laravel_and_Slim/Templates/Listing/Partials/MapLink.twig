@@ -1,0 +1,30 @@
+{% if listing.is_visible_on_map %}
+    <li>
+        <a
+                href="#"
+                class="map-toggle stat-view-map"
+                id="map-listing-{{listing.id}}"
+                data-toggle="modal"
+                data-target="#mapModalListing"
+                data-listingId="{{listing.id}}"
+                data-latitude="{{listing.latitude}}"
+                data-longitude="{{listing.longitude}}"
+                data-link="{{listing.link}}"
+                data-title="{{listing.title | e('html_attr')}}"
+                data-featured="{{listing.featured}}"
+                data-restricted="{{listing.has_restricted_category}}"
+                {% if listing.ratings_allow == 1 and listing.reviews_allow and  listing.reviews_count != 0%}
+                    data-rating="{{listing.rating}}"
+                    data-reviewsCount="{{listing.reviews_count}}"
+                {% endif %}
+                {% if listing.featured == 1 %}
+                    data-product="{{translate('public_browse_result_pages_featured_listing')}} - {{listing.product_name}}"
+                {% endif %}
+                data-address="{{listing.address | escape('html')}}"
+                data-listing-id="{{listing.id}}"
+                data-type="{{ constant('Lib\\Listings\\Stats\\Stats::STAT_OUT_INTERACTIONS_MAP') }}"
+        >
+            {{translate('public_listing_map_listing')}}
+        </a>
+    </li>
+{%endif%}

@@ -1,0 +1,14 @@
+@keyframes loader1{
+  from {opacity:1;}
+  to {opacity:0;}
+}
+.overlay {
+  width:100%; float:left;
+  height: 100%; position:fixed; z-index: 9999;
+  background:#000 url('/assets/logo-symbol.png') no-repeat center center; top:0; left: 0;
+  opacity:0; pointer-events: none; visibility: hidden;
+  transition:opacity 0.5s ease-out, visibility 0.5s ease-out;
+  &.active {
+    opacity:1; visibility: visible;
+  }
+}

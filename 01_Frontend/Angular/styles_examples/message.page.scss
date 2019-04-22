@@ -1,0 +1,74 @@
+:host {
+  .inbox-title-container {
+    margin-bottom: 10px;
+    padding-bottom: 0;
+  }
+  .message-card {
+    width: 100%;
+    float: left;
+    clear: both;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--app-default-shadow);
+    border-radius: var(--app-global-radius);
+    margin-bottom: 20px;
+    color: var(--app-primary-color);
+    &.new {
+      background: var(--app-new-panel-background-color);
+      --background: var(--app-new-panel-background-color);
+    }
+    .message-summary {
+      background:#eaf3ea;
+      width:100%;
+      padding: var(--app-panel-padding);
+      border-bottom: solid 1px var(--app-sepparator-color);
+      padding-bottom: 10px;
+
+      .date-info {
+        display: block;
+        margin: -5px 0 10px 0;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .person-container {
+        padding-bottom: 18px;
+        font-size: 17px;
+        .person-icon {
+          margin-right: 10px;
+          position: relative;
+          top: 8px;
+          font-size: 17px;
+        }
+      }
+      .subtitle {
+        .title {
+          display:block;
+          font-size:18px; font-weight: 600;
+          margin-bottom: 5px;
+        }
+      }
+    }
+    .content-container {
+      width:100%; clear:both;
+      padding: var(--app-panel-padding);
+      .event-link {
+        margin-bottom: 15px; margin-top: 15px;
+      }
+      p {
+        margin: 15px 0;
+      }
+      ul {
+        list-style: none;
+        margin: 10px 0;
+        padding: 0;
+        li {
+          display: block;  margin-bottom: 5px;
+        }
+      }
+      .other-content {
+        line-height: 180%;
+      }
+    }
+  }
+}

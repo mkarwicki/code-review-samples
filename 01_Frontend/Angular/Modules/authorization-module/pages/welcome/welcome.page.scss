@@ -1,0 +1,15 @@
+:host {
+  .welcome-actions-container {
+    min-height: calc(100vh - 200px);
+    display:flex;
+    align-items: center;
+    max-width:300px; margin:auto;
+    .welcome-actions {
+      text-align: center;
+      width:100%;
+      ion-button {
+        margin-bottom: 20px; width:100%;
+      }
+    }
+  }
+}

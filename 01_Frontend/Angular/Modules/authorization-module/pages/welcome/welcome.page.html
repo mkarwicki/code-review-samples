@@ -1,0 +1,23 @@
+<app-background></app-background>
+<ion-content class="auth-content" padding>
+    <app-header></app-header>
+    <div class="welcome-actions-container">
+        <div class="welcome-actions">
+            <ion-button color="light" shape="round" (click)="loginWithFacebook()" >
+                <ion-icon slot="start" name="logo-facebook"></ion-icon>
+                {{ "AUTH_LOG_IN_WITH_FACEBOOK" | translate }}
+            </ion-button>
+            <ion-button color="light" shape="round" (click)="loginWithGoogle()" *ngIf="0"  >
+                <ion-icon slot="start" name="logo-google"></ion-icon>
+                {{ "AUTH_LOG_IN_WITH_GOOGLE" | translate }}
+            </ion-button>
+            <ion-button color="light" shape="round"  [routerLink]="[app.nav.login.path]" routerDirection="forward">
+                <ion-icon slot="start" name="mail"></ion-icon>
+                {{ "AUTH_LOG_IN_WITH_EMAIL" | translate }}
+            </ion-button>
+            <app-register-here></app-register-here>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</ion-content>
+

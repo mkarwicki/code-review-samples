@@ -1,0 +1,39 @@
+<app-background></app-background>
+<ion-content class="auth-content" padding>
+  <app-header></app-header>
+    <div class="login-actions-container">
+      <div class="login-actions">
+        <ion-button [routerLink]="[app.nav.welcome.path]" fill="clear" color="light" routerDirection="back">
+          <ion-icon slot="start" name="arrow-back"></ion-icon>
+          Back
+        </ion-button>
+        <form (submit)="doLogin()" class="authorization-module-form">
+           <input
+              type="email"
+              [(ngModel)]="email"
+              name="email"
+              placeholder="{{ 'AUTH_EMAIL_LABEL' | translate}}"
+              class="text-input"
+            />
+            <input
+              type="password"
+              [(ngModel)]="password"
+              name="password"
+              placeholder="{{ 'AUTH_PASSWORD_LABEL' | translate}}"
+              autocomplete="password"
+              class="text-input"
+            />
+          <ion-button color="dark" shape="round" expand="full" (click)="doLogin()">
+            {{ 'AUTH_LOG_IN' | translate}}
+          </ion-button>
+        </form>
+        <p class="forgot-password">
+          <ion-button (click)="app.browser.openURL(forgotPasswordLink)" fill="clear" color="light">
+            {{ 'AUTH_FORGOT_PASSWORD' | translate}}
+          </ion-button>
+        </p>
+        <app-register-here></app-register-here>
+      </div>
+    </div>
+  <app-footer></app-footer>
+</ion-content>

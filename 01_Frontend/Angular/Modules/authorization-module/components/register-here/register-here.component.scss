@@ -1,0 +1,14 @@
+:host {
+  p {
+    line-height: 100%; margin-top:15px;
+    color:#fff; text-align: center;
+    span {
+      display:block;
+    }
+    ion-button {
+      text-transform: none;
+      text-decoration: underline;
+      font-size:rem-calc(16);
+    }
+  }
+}

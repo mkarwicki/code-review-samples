@@ -1,0 +1,106 @@
+{% set mainTabsData = listing.tabs %}
+
+<div class="listing-tabs-container">
+    {#
+      /******************************/
+      /** LISTING TABS NAVIGATION **/
+      /****************************/
+    #}
+    <div class="listing-tabs-nav">
+        <ul>
+            {% for handle,tab in mainTabsData %}
+                {%  if not tab.disableOnMobile and not (loop.index > 5) %}
+                    <li>
+                        <a class="tab-toggle" data-tab-handle="{{ handle }}" data-listing-id="{{ listing.id }}">
+                            <span class="v-a-w">
+                                <span class="v-a">
+                                    <span class="tab-content">
+                                        <span class="quantity">{{ tab.quantity }}</span>
+                                        <span class="label-short">{{ tab.labelShort }}</span>
+                                        <span class="label-long">{{ tab.labelLong }}</span>
+                                    </span>
+                                </span>
+                            </span>
+                        </a>
+                    </li>
+                {%  endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    {#
+      /****************************************************/
+      /** LISTING TABS NAVIGATION SECOND - FOR DESCKTOP **/
+      /**************************************************/
+    #}
+    <div class="
+        listing-tabs-nav-second
+         {%  if mainTabsData | length  < 1%}
+             no-tabs
+         {%  endif %}
+        "
+    >
+        <div class="other-actions">
+            {% if listing.has_restricted_category == constant('Orm\\Model\\Listings\\Listings::NO_RESTRICTED_CATEGORY') %}
+                {% include 'Blocks/Search/Listing/Partials/AddReview.twig' with {'showIcon': true }  %}
+            {% endif %}
+            {% include 'Blocks/Search/Listing/Partials/MoreDetails.twig' with {'showIcon': true }  %}
+        </div>
+        <ul class="listing-{{ listing.listingBoxType }}">
+            {% for handle,tab in mainTabsData %}
+                {% if loop.index > 5  %}
+
+                {% else %}
+                <li>
+                    <a
+                        data-tab-handle="{{ handle }}"
+                        data-listing-id="{{ listing.id }}"
+                        class="
+                        tab-toggle tab-toggle-desktop
+                        {% if loop.index==1 %}
+                            active
+                        {% endif %}
+                        "
+                    >
+                        <span class="quantity">{{ tab.quantity }}</span>
+                        <span class="label-long">{{ tab.labelLong }}</span>
+                    </a>
+                </li>
+                {% endif %}
+            {% endfor %}
+            {% include 'Blocks/Search/Listing/Partials/MapLink.twig' %}
+        </ul>
+    </div>
+    {#
+      /*******************/
+      /** LISTING TABS **/
+      /*****************/
+    #}
+    <div class="listing-tabs">
+        {% for handle,tab in mainTabsData %}
+            <div class="listing-tab {{ handle }}-tab" data-tab-handle="{{ handle }}" data-listing-id="{{ listing.id }}">
+                {%  if handle == 'description' %}
+                    {% include 'Blocks/Search/Listing/ListingTabs/Tabs/DescriptionTab.twig' %}
+                {% endif %}
+                {%  if handle == 'special_offers' %}
+                    {% include 'Blocks/Search/Listing/ListingTabs/Tabs/SpecialOffersTab.twig' %}
+                {% endif %}
+                {%  if handle == 'events' %}
+                    {% include 'Blocks/Search/Listing/ListingTabs/Tabs/EventsTab.twig' %}
+                {% endif %}
+                {%  if handle == 'reviews' %}
+                    {% include 'Blocks/Search/Listing/ListingTabs/Tabs/ReviewsTab.twig' %}
+                {% endif %}
+                {%  if handle == 'articles' %}
+                    {% include 'Blocks/Search/Listing/ListingTabs/Tabs/ArticlesTab.twig' %}
+                {% endif %}
+                {%  if handle == 'associations' %}
+                    {% include 'Blocks/Search/Listing/ListingTabs/Tabs/AssociationsTab.twig' %}
+                {% endif %}
+                {%  if tab.type is defined and tab.type == 'tags' %}
+                    {% include 'Blocks/Search/Listing/ListingTabs/Tabs/TagsTab.twig' with {'tab': tab}  %}
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+

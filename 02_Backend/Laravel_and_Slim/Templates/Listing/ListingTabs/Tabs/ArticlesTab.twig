@@ -1,0 +1,13 @@
+<div class="tab-content articles-tab">
+    {% for article in listing.tabs.articles.data %}
+        <div class="article">
+            <h4>
+                {{ article.title }}
+            </h4>
+            <p>{{(article.overview ~ article.content) | raw |striptags [:500]~ '...' }}</p>
+            <a href="{{ article.getUrl() }}" target="_blank" class="default-tab-button">
+                {{ translate('public_browse_result_pages_tab_read_more') }}
+            </a>
+        </div>
+    {% endfor %}
+</div>

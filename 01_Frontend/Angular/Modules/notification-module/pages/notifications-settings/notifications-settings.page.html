@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'NOTIFICATION_NOTIFICATIONS_SETTINGS' | translate }}</ion-title>
+    <ion-buttons slot="end" *ngIf="changesMade">
+      <ion-button fill="clear" (click)="saveNotificationSettings()">
+        <ion-icon slot="start" name="save"></ion-icon>
+        {{ 'NOTIFICATION_SAVE' | translate }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-list *ngFor="let group of notificationsByGroup | keyvalue:nativeOrder">
+    <ion-list-header>
+      {{ 'NOTIFICATION_NOTIFICATIONS_GROUP_SETTINGS' | translate:{group: group.key} }}
+    </ion-list-header>
+     <div *ngFor="let notification of group.value | keyvalue">
+      <ion-item>
+        <ion-label text-wrap>
+          {{notification.value.settingsTitle}}
+        </ion-label>
+        <ion-toggle
+            [checked]="pushNotificationSettingsTmp[notification.value.id]?.enabled"
+            (ionChange)="toggleNotificationOption(notification.value.id)"
+        ></ion-toggle>
+      </ion-item>
+    </div>
+  </ion-list>
+  <ion-button
+          shape="round"
+          color="primary"
+          fill="outline"
+          expand="full"
+          (click)="saveNotificationSettings()"
+          *ngIf="changesMade"
+  >
+    <ion-icon slot="start" name="save"></ion-icon>
+    {{ 'NOTIFICATION_SAVE' | translate }}
+  </ion-button>
+</ion-content>

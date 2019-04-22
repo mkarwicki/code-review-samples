@@ -1,0 +1,163 @@
+{#
+    CURRENT COMPONENT DEPENDENCIES:
+    JAVASCRIPT:
+    www/aa_au/src/Apps/Page/Resources/Js/modules/search/listing2018.js
+    CSS:
+    www/aa_au/src/Apps/Page/Resources/Css/less/search/listing2018/listing2018.less
+#}
+{% if listing.featured == 1 %}
+    {% set dataAnalytics = "From_RP_to_Listings_featured" %}
+    {% set dataAnalyticsAddReview = "add_review_results_featured" %}
+{% else%}
+    {% set dataAnalytics = "From_RP_to_Listings" %}
+    {% set dataAnalyticsAddReview = "add_review_results_standard" %}
+{% endif %}
+{#
+    /***************************/
+    /** MAIN LISTING WRAPPER **/
+    /*************************/
+#}
+
+<div class="listing-container"
+     data-id="{{listing.id}}"
+     data-filterEvents="{{ listing.has_events }}"
+     data-filterDistance="{{ listing.distance|round(2) }}"
+     data-filterMostPopular="{{ listing.has_most_popular_last_year }}"
+     data-filterRating="{{ listing.rating }}"
+     data-filterAssociations="{% if listing.tabs.associations is defined %}{% for associationListing in listing.tabs.associations.data %}{{ associationListing.id }}{% if not loop.last %},{% endif %}{% endfor %}{% endif %}"
+     data-filterSpecialOffers="{% if listing.tabs.special_offers is defined %}1{% else %}0{% endif %}"
+     data-filterBooking="{% if listing.hasBookingWidget == true %}1{% else %}0{% endif %}"
+     data-filterCertifications="{% if listing.tabs.certifications is defined %}{{ listing.certifications|join(",") }}{% endif %}"
+     data-filterQualifications="{% if listing.tabs.qualifications is defined %}{{ listing.qualifications|join(",") }}{% endif %}"
+     data-claimed="{% if listing.claimed == true %}1{% else %}0{% endif %}"
+     data-querynum="{{ listing.query_num }}"
+     data-revscore="{{ listing.relevance_score }}">
+    <div
+        class="listing listing-{{ listing.listingBoxType }}"
+        itemscope
+        itemtype="http://schema.org/LocalBusiness"
+        data-id="{{listing.id}}"
+    >
+        {#
+          /**************************/
+          /** LISTING HEADER AREA **/
+          /************************/
+        #}
+        <div class="listing-header {{ listing.showListingLogo }}">
+            {#
+              /********************************************/
+              /** LISTING POSITION IN MOST POPULAR LIST **/
+              /*******************************************/
+              - DISPLAYS INDEX OF LISTING ON MOST POPULAR RANKING PAGE
+            #}
+            {% include 'Blocks/Search/Listing/ListingHeader/ListingMostPopularIndex.twig' %}
+            {#
+               /********************/
+               /** LISTING STATUS **/
+               /******************/
+               - DISPLAYS INFO WHEATER LISTING IS FEATURED AND WHAT KIND OF PACKEGE IT IS
+            #}
+            {% include 'Blocks/Search/Listing/ListingHeader/ListingStatus.twig' %}
+            {#
+                /*******************************/
+                /** LITING MAIN HEADER IMAGE **/
+                /*****************************/
+            #}
+            {% include 'Blocks/Search/Listing/ListingHeader/ListingMainHeaderImage.twig' %}
+            {#
+                /********************/
+                /** LISTING TITLE **/
+                /******************/
+            #}
+            {% include 'Blocks/Search/Listing/ListingHeader/ListingTitle.twig' %}
+            {#
+                /*************************/
+                /** LISTING BREADCRUMB **/
+                /***********************/
+            #}
+            {% include 'Blocks/Search/Listing/ListingHeader/ListingBreadcrumb.twig' %}
+            {#
+                /*********************/
+                /** LISTING RATING **/
+                /*******************/
+            #}
+            {% include 'Blocks/Search/Listing/ListingHeader/ListingRating.twig' %}
+            {#
+               /**************************/
+               /** LISTING SAVE ACTION **/
+               /************************/
+            #}
+            {% include 'Blocks/Search/Listing/ListingHeader/ListingSaveAction.twig' %}
+        </div>
+        <div class="
+                listing-main-content
+                {% if (listing.images | length) > 0 %}
+                    with-gallery
+                {% endif %}
+                {% if listing.most_popular_rankings_count != 0 and listing.most_popular_rankings_count.all > 0 %}
+                    with-most-popular
+                {% endif %}
+            ">
+            {#
+              /*************************/
+              /** LISTING MEDIA AREA **/
+              /***********************/
+            #}
+            <div class="listing-media-list">
+                <div class="media-list-slider">
+                    {#
+                      /*********************************/
+                      /** LISTING MAIN GALLERY IMAGE **/
+                      /*******************************/
+                    #}
+                    {% include 'Blocks/Search/Listing/ListingMedia/ListingMainMediaImage.twig' %}
+
+                    {#
+                     /*****************************************/
+                     /** LISTING MOST POPULAR BADGES MOBILE **/
+                     /***************************************/
+                    #}
+                    {% include 'Blocks/Search/Listing/ListingMedia/MostPopularBadges.twig' with {'showOnClass': 'show-on-mobile' } %}
+                    {#
+                      /**********************/
+                      /** LISTING GALLERY **/
+                      /********************/
+                    #}
+                    {% include 'Blocks/Search/Listing/ListingMedia/ListingGallery.twig' %}
+                    {#
+                     /***********************************/
+                     /** LISTING MOST POPULAR DESKTOP **/
+                     /*********************************/
+                    #}
+                    {% include 'Blocks/Search/Listing/ListingMedia/MostPopularBadges.twig' with {'showOnClass': 'show-on-desktop' }  %}
+                </div>
+            </div>
+            {#
+             /***************************/
+             /** LISTING ADDRESS INFO **/
+             /*************************/
+            #}
+            {% include 'Blocks/Search/Listing/ListingAdressInfo/ListingAdressInfo.twig' %}
+            {#
+              /******************************/
+              /** LISTING ACTIONS BUTTONS **/
+              /****************************/
+            #}
+            {% if hideButtons is not defined %}
+                {% include 'Blocks/Search/Listing/ListingActionButtons/ListingActionButtons.twig' %}
+            {% endif %}
+        </div>
+        {#
+          /*******************/
+          /** LISTING TABS **/
+          /*****************/
+        #}
+        {% include 'Blocks/Search/Listing/ListingTabs/ListingTabs.twig' %}
+        {#
+            /***************************/
+            /** LISTING MORE OPTIONS **/
+            /*************************/
+        #}
+        {% include 'Blocks/Search/Listing/ListingMoreOptions/ListingMoreOptions.twig' %}
+    </div>
+</div>

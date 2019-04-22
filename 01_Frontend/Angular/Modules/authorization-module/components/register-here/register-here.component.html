@@ -1,0 +1,6 @@
+<p *ngIf="app.paymentsEnabled">
+  <span>{{ "AUTH_DONT_HAVE_AN_ACCOUNT" | translate }}</span>
+  <ion-button fill="clear" color="light" (click)="app.browser.openURL(registerHereLink)">
+    {{ "AUTH_REGISTER_HERE" | translate }}
+  </ion-button>
+</p>

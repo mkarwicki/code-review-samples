@@ -1,0 +1,13 @@
+:host {
+  width: 100%; height:100%;
+  position:fixed; top:0; left:0;
+  background:url("/assets/images/backgrounds/authorization_module_bg.jpg") no-repeat center center;
+  background-size:cover; z-index: 1;
+  &:before {
+    //background:var(--ion-color-primary);
+    background:#003871;
+    position:absolute; top:0; left: 0;
+    width:100%; height: 100%; content:'';
+    display:block; opacity:0.8;
+  }
+}

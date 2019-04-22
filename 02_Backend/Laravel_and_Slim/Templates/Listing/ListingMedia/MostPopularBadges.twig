@@ -1,0 +1,28 @@
+{% if listing.most_popular_rankings_count != 0 and listing.most_popular_rankings_count.all > 0 %}
+<div
+    class="
+        listing-most-popular-badges
+        {% if (listing.images | length) > 0 %}
+            with-gallery
+        {% endif %}
+        {{ showOnClass }}
+    "
+>
+    {% for key, year in listing.most_popular_rankings_count %}
+        {% if key != 'all' %}
+            <div class="listing-media">
+                <a
+                    href="{{listing.link}}#most-popular-box"
+                >
+                    <img
+                        src="{{ STATIC_DOMAIN ~'/core/img/most_popular_'~ year ~'.png'}}"
+                        alt="{{translate('public_listing_most_popular_alt',[config('root_category'), year])}}"
+                    >
+                </a>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
+
+

@@ -1,0 +1,80 @@
+{% block toggle_widget -%}
+    <label>
+        {{ label | trans | raw }}
+        <input
+                type="checkbox"
+                {{ block('widget_attributes') }}
+                {% if value is defined %}
+                    value="{{ value }}"
+                {% endif %}
+                {% if checked %} checked="checked"{% endif %}
+        />
+        <span></span>
+    </label>
+{%- endblock toggle_widget %}
+
+
+
+
+{% block date_widget -%}
+    {%- if widget == 'single_text' -%}
+        <input
+                type="text"
+                name="{{ full_name }}"
+                class="form-control datepicker-input"
+                autocomplete="off"
+                id="{{ id }}"
+                data-target="#{{ id }}"
+                data-toggle="datetimepicker"
+                {% if value is not empty %}
+                    value="{{ value| date('Y-m-d') }}"
+                {% endif %}
+        />
+    {%- endif -%}
+{%- endblock date_widget %}
+
+
+
+
+{% block customdatetime_widget -%}
+    {%- if widget == 'single_text' -%}
+        <input
+            type="text"
+            name="{{ full_name }}"
+            class="form-control datetimepicker-input"
+            autocomplete="off"
+            id="{{ id }}"
+            data-target="#{{ id }}"
+            data-toggle="datetimepicker"
+            {% if value is not empty %}
+                value="{{ value| date('Y-m-d H:i') }}"
+            {% endif %}
+        />
+    {%- else -%}
+        {% set attr = attr|merge({class: (attr.class|default('') ~ ' form-inline')|trim}) -%}
+        <div {{ block('widget_container_attributes') }}>
+            {{- form_errors(form.date) -}}
+            {{- form_errors(form.time) -}}
+
+            <div class="sr-only">
+                {%- if form.date.year is defined %}{{ form_label(form.date.year) }}{% endif -%}
+                {%- if form.date.month is defined %}{{ form_label(form.date.month) }}{% endif -%}
+                {%- if form.date.day is defined %}{{ form_label(form.date.day) }}{% endif -%}
+                {%- if form.time.hour is defined %}{{ form_label(form.time.hour) }}{% endif -%}
+                {%- if form.time.minute is defined %}{{ form_label(form.time.minute) }}{% endif -%}
+                {%- if form.time.second is defined %}{{ form_label(form.time.second) }}{% endif -%}
+            </div>
+
+            {{- form_widget(form.date, { datetime: true } ) -}}
+            {{- form_widget(form.time, { datetime: true } ) -}}
+        </div>
+    {%- endif -%}
+{%- endblock customdatetime_widget %}
+
+
+
+
+
+
+
+

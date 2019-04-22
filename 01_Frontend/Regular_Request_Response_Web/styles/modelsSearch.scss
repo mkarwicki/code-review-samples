@@ -1,0 +1,92 @@
+.modelsSearchFormSectionContainer {
+	width:100%; float:left; clear:both;
+	background:$black; padding:51px 0 60px 0;
+	border-bottom:solid 1px #333333;
+	&.modelsSearchPage {
+		padding:40px 0 10px 0;
+	}
+	.modelsSearchForm {
+		h3 {
+			color:$white;
+		}
+		.searchFormSection {
+			width:100%; float:left; clear:both;
+		}
+	}
+}
+@media #{$small-only}{
+	.modelsSearchFormSectionContainer {
+		padding:40px 0 70px 0;
+		&.modelsSearchPage {
+			padding:20px 0 10px 0;
+		}
+	}
+}
+@media #{$large-up}{
+	.clear-large-up {clear:both; }
+}
+.modelSerachForm {
+	width:100%; float:left; clear:both; margin:-15px 0 0 0;
+	label {
+		color:$white; font-family:$bold-font;
+		border-bottom:solid 1px #4d4d4d; padding-bottom:5px;
+		margin-top:20px; margin-bottom:15px;
+		a {
+			font-family:$regular-font; float:right; font-size:rem-calc(14);
+		}
+	}
+	.multipleSelectContainer {
+		max-height:120px; width:100%; overflow:auto;
+		.optionContainer {
+			display:block; width:100%; float:left; clear:both; position:relative;
+			a {
+				display:block; float:left; padding-left:25px; height:24px; line-height:24px; text-decoration:none;
+				&:before {
+					width:15px; height:15px; display:block; background:url(../images/misc/selectBg.svg) no-repeat center center;
+					content:""; position:absolute; top:50%; left:0; margin-top:-7px;
+				}
+				&.active {
+					&:before {
+						background:url(../images/misc/activeSelectBg.svg) no-repeat center center;
+					}
+				}
+			}
+		}
+	}
+	button {
+		margin-top:10px;
+	}
+}
+.rangeSlider {
+	width:100%; float:left; clear:both; position:relative;
+	height:75px; border-bottom:solid 1px rgba(0,0,0,0.1);
+	margin-bottom:10px;  margin-top:0;
+	padding:15px 15px 0 15px;
+	.min {position:absolute; top:40px; left:0; font-size:rem-calc(18);}
+	.max {position:absolute; top:40px; right:0; font-size:rem-calc(18);}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

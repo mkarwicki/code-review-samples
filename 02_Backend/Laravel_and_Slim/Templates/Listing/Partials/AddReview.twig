@@ -1,0 +1,11 @@
+<a
+    href="{{urlFor('page.listing_reviews_add', {'id': listing.id})}}"
+    data-analytics="{{ dataAnalyticsAddReview }}"
+    data-listing-id="{{listing.id}}"
+    data-type="{{ constant('Lib\\Listings\\Stats\\Stats::STAT_OUT_INTERACTIONS_REVIEWS') }}"
+>
+    {% if(showIcon) %}
+        <i class="fa fa-plus"></i>
+    {% endif %}
+    {{translate('public_listing_add_a_review_listing')}}
+</a>

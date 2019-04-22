@@ -1,0 +1,59 @@
+{% if browserConfigurationData.sortFields %}
+    <thead>
+    <tr>
+        <td>
+            <div class="job-order">
+                <table cellspacing="0" cellpadding="0" class="order-table company-order-table">
+                    <tr>
+                        <td class="offers-found job-description">
+                            {{ jobs|length }} offers found
+                        </td>
+                        <td class="job-gap">
+
+                        </td>
+                        {% for sortField in browserConfigurationData.sortFields %}
+                            <td class="sortable-column sortable-column-{{ sortField.slug }}">
+                                {% if app.request.get('sort') %}
+                                    {% set sOrder = sortField.sortOrder %}
+                                {% else %}
+                                    {% if loop.index == 1 %}
+                                        {% set sOrder = 'asc' %}
+                                    {% else %}
+                                        {% set sOrder = 'desc' %}
+                                    {% endif %}
+                                {% endif %}
+
+                                <a
+                                    href="{{ path(
+                                    'users_jobs',
+                                    filterRouteParams|merge (
+                                    {
+                                        (browserConfigurationData.sortKey) : sortField.slug,
+                                        (browserConfigurationData.sortOrderKey) : sOrder
+                                    }
+                                    )
+                                    ) }}"
+                                    {% if sortField.active %}
+                                        class="active"
+                                    {% endif %}
+                                >
+                                    {{ sortField.title }}
+                                    {% if sortField.active %}
+                                        {% if( sortField.sortOrder == 'asc' or not app.request.get('sort')) %}
+                                            <span class="sort-order-decorator down"></span>
+                                        {% else %}
+                                            <span class="sort-order-decorator up"></span>
+                                        {% endif %}
+                                    {% else %}
+                                        <span class="sort-order-decorator both-ways"></span>
+                                    {% endif %}
+                                </a>
+                            </td>
+                        {% endfor %}
+                    </tr>
+                </table>
+            </div>
+        </td>
+    </tr>
+    </thead>
+{% endif %}

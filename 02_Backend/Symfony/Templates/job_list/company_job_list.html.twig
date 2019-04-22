@@ -1,0 +1,41 @@
+{%  extends 'base.html.twig' %}
+{%  block body %}
+    <div class="job-list-page-section-container">
+        <div class="main-wrapper">
+            <div class="container">
+                {{ include('common/components/flashes/flashes.html.twig') }}
+                <h1 class="page-title">
+                    My jobs
+                </h1>
+                {#
+                    BROWSER AND FILTERS AREA
+                #}
+                <form action="{{ path('users_jobs') }}">
+                    {{ include('users/companies/pages/job_list/_browser.html.twig') }}
+                    {{ include('users/companies/pages/job_list/_mobile_browser_actions.html.twig') }}
+                </form>
+                {#
+                   JOB LIST AREA (ORDER AND LIST ITSELF) AND EMPTY LIST WHEN NO JOBS
+                #}
+                {% if jobs|length > 0 %}
+                    <table cellpadding="0" cellspacing="0" class="job-list-table">
+                        {{ include('users/companies/pages/job_list/_order.html.twig') }}
+                        {# THIS LIST INCLUDES JOB CARD #}
+                        {{ include('users/companies/pages/job_list/_list.html.twig') }}
+                    </table>
+                    {{ include('users/companies/pages/job_list/_paggination.html.twig') }}
+                {% else %}
+                    {% if app.request.get('q') or app.request.get('status') %}
+                        {% include 'common/components/lists/empty_list_info.html.twig' with { 'text' : '0 results found' }  %}
+                    {% else %}
+                        {% include 'common/components/lists/empty_list_info.html.twig' with { 'text' : 'You haven’t added any jobs yet!' }  %}
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+

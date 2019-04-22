@@ -1,0 +1,10 @@
+:host {
+  height:100px;
+  .logo-container {
+    width:100%; padding-top: 30px;
+    text-align: center;
+    img {
+      width:300px; max-width:100%; height: auto;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+.auth-content {
+  z-index: 10;
+  --background:none;
+  /*FORM STYLES OVERRIDES */
+  .authorization-module-form {
+    input {
+      background:#fff;
+      margin-bottom: 20px;
+      border-radius:20px;
+      width:100%;
+      padding:10px 20px;
+      height:40px;
+      border:none;
+    }
+  }
+}

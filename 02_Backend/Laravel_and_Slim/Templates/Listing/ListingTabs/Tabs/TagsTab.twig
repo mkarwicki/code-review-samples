@@ -1,0 +1,9 @@
+<div class="tab-content tags-tab">
+    <ul>
+        {% for tags in tab.data %}
+            <li>
+                {{ tags.name }}{% if tags.details is not empty %}: {{ tags.details }}{% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</div>

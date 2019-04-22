@@ -1,0 +1,9 @@
+<div class="tab-content description-tab">
+    <p>
+        <span>{{listing.short_description | escape('html')}}</span>
+        {% if listing.short_description_second_part is defined %}
+            <span>... <a href="#" class="read-more-desc">{{ translate('public_general_read_more') }}</a></span>
+            <span class="read-more-content hide">{{ listing.short_description_second_part }}</span>
+        {% endif %}
+    </p>
+</div>

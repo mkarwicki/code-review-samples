@@ -1,0 +1,10 @@
+{% if listing.featured  %}
+    <div class="listing-status">
+        <span class="short-status">
+            {{ translate('public_browse_result_pages_featured') }}
+        </span>
+        <span class="extended-status">
+           {{translate('public_browse_result_pages_featured_listing')}} - {{listing.product_name}}
+        </span>
+    </div>
+{% endif %}
